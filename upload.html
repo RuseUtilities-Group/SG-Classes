@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="/scripts/settingsTheme.js"></script>
+		<link href="./styles/main.css" rel="stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text&display=swap" rel="stylesheet"> 
+		<link rel="icon" href="./styles/images/kronosicon.png" type="image/icon type">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+		<title>Upload Timetable</title>
+
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+	</head>
+	<body>
+		<div id="body">
+			<main>
+				<div class="upload" style="position: absolute; top: 0%; left: 5%">
+					<div id="outputLOL" style="font-size: 22.5px"> 
+						<p style="font-size: 35px !important"><b>Upload School Timetable</b></p>
+						<p>How to upload your timetable from Sentral:</p>
+						<p>1. Login to <a href="https://jamesruseahs.sentral.com.au/portal/timetable/mytimetable" target="_blank" class="link">Sentral</a></p>
+						<p>2. Go to the timetable page by clicking the navbar on the left side of the page.</p>
+						<p>3. Click "Export as iCal" in the top right corner.</p>
+						<p>4. Upload the downloaded file "my_timetable.ics" here.</p>
+						<p>5. Press submit to enter the RuseKronos WebApp</p>
+						<input type="file" id="myFile"/>
+						<input type="button" id="submitButton" value="Submit" onClick="icalProcess()"/>
+	
+					</div>
+				</div>
+			</main>
+		</div>
+		<script type="text/javascript" src="/scripts/icalParse.js"></script>
+		<script type="text/javascript" src="/scripts/ical.js"></script>
+	</body>
+</html>

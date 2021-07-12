@@ -1,0 +1,128 @@
+<!--By Joshua Koh, Ethan Du Toit, Yurui Zi-->
+<!DOCTYPE html>
+<html lang="en"> 
+    <head>
+        <title>Dashboard</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="RuseKronos is a utility designed for teachers and students at James Ruse Agricultural High School and offers ergonomic, sleek and responsive user interface designs and new features. Access a minimalistic dashboard or a staff email list or the school calendar as well as links to sentral straight from any page. Customise colours appearance and personalise the website in settings with ease.">
+        <meta property="og:image" content="./styles/images/kronosImagePreview.png">
+        <meta name="keywords" content="RuseKronos, Kronos, Bell Times, Ruse, James Ruse Agricultural High School, James Ruse, James Ruse A.H.S, JRAHS, RuseUtilities Group">
+        <meta property="og:title" content="RuseKronos">
+        <meta property="og:url" content="https://rusekronos.xyz">
+        <meta property="og:description" content="RuseKronos is a utility designed for teachers and students at James Ruse Agricultural High School and offers ergonomic, sleek and responsive user interface designs and new features. Access a minimalistic dashboard or a staff email list or the school calendar as well as links to sentral straight from any page. Customise colours appearance and personalise the website in settings with ease.">
+        <meta name="author" content="RuseUtilities Group">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="./styles/images/kronosicon.png" type="image/icon type">
+
+        <script>
+          if (localStorage.getItem("personalTimetable") == null) {
+              window.location.href = "./landing.html"
+          }
+        </script>
+        <link rel="manifest" href="./manifest.webmanifest">
+        <link rel=preconnect href="https://cdnjs.cloudflare.com">
+        <link rel="stylesheet" href="./styles/main.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="./scripts/settingsTheme.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.5.1.min.js"><\/script>')</script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    </head>
+    <body onload="startTime()">
+      <div id="body1">
+        <nav id="navbar" class="navbar navbar-expand-lg bg-dark navbar-dark">
+          <a class="navbar-brand" href="./index.html">
+              <img src="./styles/images/kronosicon.png" alt="logo" style="width:40px;">
+          </a>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="timetable.html">Timetable</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="notes.html">Note Taking</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Utilities
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="calendar.html">School Events Calendar</a>
+                <a class="dropdown-item" href="staff.html">Staff Email List</a>
+                <a class="dropdown-item" href="links.html">Useful Links</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop2" data-toggle="dropdown">
+                Info
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="https://jamesruseahs.sentral.com.au/portal/reports/publishedreports">Academic Reports</a>
+                <a class="dropdown-item" href="https://jamesruseahs.sentral.com.au/portal/attendance/overview">Student Attendance</a>
+                <a class="dropdown-item" href="https://jamesruseahs.sentral.com.au/portal/timetable/mytimetable">Sentral Timetable</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="settings.html">Settings</a>
+            </li>
+          </ul>
+        </nav>
+
+        <container class="kronosTimer">
+          <div id="insight">
+            <p style="font-size: 25px"><span id="period" style="font-size: 27.5px !important"></span> <span class="nono"><noscript id="day"></noscript> </span></p>
+            <b><h1 id="periodCountdown" style="font-size: 40px !important"></h1></b>
+            <p id="periodInfo" style="font-size: 22.5px !important"></p>
+            <br>
+            <p><span id="timer"></span></p>
+          </div>
+          <div id="todaysClasses">
+            <h2 style="font-size: 32.5px" id="classTitle">TODAY'S CLASSES</h2>
+            <table id="times" style="font-size: 22.5px">
+            </table>
+          </div>
+          <noscript>Javascript is required for the correct operation of this website. Please enable it for us.</noscript>
+        </container>
+        <br>
+        <div id="info">
+          <div id="weatherContainer">
+            <img id="weatherLogo" alt="|">
+            <p id="currentTemp"></p>
+          </div>
+          <div id="greetingDiv">
+          </div>
+          <div id="clock">
+              <p id="time"></p>
+              <p id="date" style="font-size: 200%; margin-top: -3%;"></p>
+          </div>
+          <div id="quoteContainer">
+            <i><h2 id="quotesBody"></h2></i>
+            <h3 id="quotesAuthor"></h3>
+        </div>
+          <div class="TodoListClass">
+              <form>
+                  <label for="todo-input" style="display:none;">yurui is bad</label>
+                  <input type="text" id="todo-input" class="todo-input" />
+                  <button aria-label="Submit Todo" class="todo-button" type="submit">
+                  <i class="fas fa-plus-square"></i>
+                  </button>
+                  <div class="select">
+                          <select name="todos" class="filter-todo">
+                              <option value="all">All Tasks</option>
+                              <option value="completed">Completed Tasks</option>
+                              <option value="uncompleted">Uncompleted Tasks</option>
+                          </select>
+                  </div>
+              </form>
+              <div class="todo-container">
+                  <ul class="todo-list"></ul>
+              </div>
+          </div>
+        </div>
+      </div>
+      <script src="/scripts/index.js"></script>
+      <script src="/scripts/timer.js"></script>
+    </body>
+</html>
