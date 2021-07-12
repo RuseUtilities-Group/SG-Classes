@@ -30,7 +30,7 @@ function getTemplate() {
 	return new Promise((resolve, reject) => {
 		let xhr = new XMLHttpRequest();
 		xhr.responseType = 'json';
-		xhr.open('GET', '/scripts/coronaBellTimes.json', true);
+		xhr.open('GET', '/scripts/bellTimes.json', true);
 		xhr.onloadend = function (e) {
 			resolve(xhr.response);
 		};
@@ -111,12 +111,12 @@ async function icalProcess() {
 		for(var i = offset; i < events.length; i++) {
 			// console.log(events[i]);
 			//Read in values from the JSON file
-			var eventStart = events[i].getFirstPropertyValue('dtstart');
-			var eventEnd = events[i].getFirstPropertyValue('dtend');
+			//var eventStart = events[i].getFirstPropertyValue('dtstart');
+			//var eventEnd = events[i].getFirstPropertyValue('dtend');
 			var description = events[i].getFirstPropertyValue('description');
 			var summary = events[i].getFirstPropertyValue('summary');
 			var lctn = events[i].getFirstPropertyValue('location');
-
+			/*
 			//Dealing with time
 			// var periodStart = new Date(Date.UTC(eventStart.year, eventStart.month, eventStart.day, eventStart.hour, eventStart.minute, 0, 0))
 			var periodStart = new Date(Date.UTC(1, 1, 1, eventStart.hour + 1, eventStart.minute, 0, 0))
@@ -130,18 +130,19 @@ async function icalProcess() {
 
 			var hours = periodStart.getHours();
 			var minute = periodStart.getMinutes();
-
+			*/
 			//Dealing with the description elements
 			var tAndP = description.split("\n");
+			console.log(tAndP);
 			var teacherTitle = tAndP[0].split(" ")[1];
 			var teacherFirstName = tAndP[0].split(" ")[2];
 			var teacherLastName = tAndP[0].split(" ")[3];
 			var teacher = teacherTitle + " " + teacherLastName.charAt(0).toUpperCase() + teacherLastName.slice(1).toLowerCase(); ;
-			var period = parseInt(tAndP[1].split(": ")[1], 10);
+			var periodList = tAndP[1].split(": ");
+			var period = String(periodList[1]);
 
 			//Dealing with the summary elements
 			var subject1 = summary.split(": ")[1];
-			var class1 = summary.split(": ")[0];
 			var subject = subject1.split(" Yr")[0];
 
 			//Dealing with the location elements
@@ -160,22 +161,18 @@ async function icalProcess() {
 				break;
 			}
 
-			console.log(i);
-			console.log("day: " + curDay);
-
 
 			// console.log(jsonData.timetableData[listOfDays[curDay]]);
 			// jsonData.timetableData[listOfDays[curDay]][`Period ${period}`];
 			if(curDay % 5 == 0 && period > 4) {
 				console.log("what")
 			}
-
-			//jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].startTime = `${hours-1}:${minute.toString().padStart(2, '0')}`;
-			jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].periodLength = (Math.abs(periodEnd - periodStart) / (1000 * 60)).toString();
 			jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].teacher = teacher;
 			jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].subject = subject;
-			jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].class1 = class1;
+			//jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].class1 = class1;
 			jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].room = room;
+			//jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].startTime = `${hours-1}:${minute.toString().padStart(2, '0')}`;
+			//jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].periodLength = (Math.abs(periodEnd - periodStart) / (1000 * 60)).toString();
 
 			// console.log(periodStart);
 			// console.log(periodEnd);
@@ -192,7 +189,7 @@ async function icalProcess() {
 		}
 		console.log(jsonData);
 		localStorage.setItem("personalTimetable", JSON.stringify(jsonData));
-		window.location.href = "/index.html";
+		//window.location.href = "/index.html";
 	} catch(err) {
 		console.log(err);
     }
