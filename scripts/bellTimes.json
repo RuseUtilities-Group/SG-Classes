@@ -282,7 +282,7 @@
 },
 
 "fridayA":{ 
-	"Period H":{
+	"Period 0":{
         "name": "Period H",
 		"subject": "",
 		"room": "",
@@ -291,7 +291,7 @@
 		"periodLength": "40"
 	},
 
-	"Period Ass":{
+	"Period 1":{
         "name": "Period Ass",
 		"subject": "",
 		"room": "",
@@ -635,7 +635,7 @@
 },
 
 "fridayB":{ 
-	"Period H":{
+	"Period 0":{
         "name": "Period H",
 		"subject": "",
 		"room": "",
@@ -644,7 +644,7 @@
 		"periodLength": "40"
 	},
 
-	"Period Ass":{
+	"Period 1":{
         "name": "Period Ass",
 		"subject": "",
 		"room": "",
