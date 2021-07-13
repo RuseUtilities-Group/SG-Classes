@@ -137,8 +137,10 @@ async function icalProcess() {
 			var teacherTitle = tAndP[0].split(" ")[1];
 			var teacherFirstName = tAndP[0].split(" ")[2];
 			var teacherLastName = tAndP[0].split(" ")[3];
-			var teacher = teacherTitle.charAt(0).toUpperCase() + teacherTitle.slice(1).toLowerCase(); + " " + teacherLastName.charAt(0).toUpperCase() + teacherLastName.slice(1).toLowerCase();
-			//console.log(teacher);
+			console.log(teacherFirstName);
+			console.log(teacherLastName);
+			var teacher = teacherTitle.charAt(0).toUpperCase() + teacherTitle.slice(1).toLowerCase() + " " + teacherLastName.charAt(0).toUpperCase() + teacherLastName.slice(1).toLowerCase();;
+			console.log(teacher);
 			var period = tAndP[1].split(": ")[1];
 			if(period === "H") period = 0;
 			else if(period === "Ass") period = 1;
