@@ -36,26 +36,6 @@
           <li class="nav-item">
             <a class="nav-link" href="notes.html">Note Taking</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Utilities
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="calendar.html">School Events Calendar</a>
-              <a class="dropdown-item" href="staff.html">Staff Email List</a>
-              <a class="dropdown-item" href="links.html">Useful Links</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Info
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="https://jamesruseahs.sentral.com.au/portal/reports/publishedreports">Academic Reports</a>
-              <a class="dropdown-item" href="https://jamesruseahs.sentral.com.au/portal/attendance/overview">Student Attendance</a>
-              <a class="dropdown-item" href="https://jamesruseahs.sentral.com.au/portal/timetable/mytimetable">Sentral Timetable</a>
-            </div>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="settings.html">Settings</a>
           </li>
@@ -86,7 +66,7 @@
             </div>
             <div style="display: flex; padding: 2.5%; padding-top: 1% !important;">
               <p style="margin-top: 1.5%;">Weather Location (Suburb,NSW)</p>
-              <input id="weatherInput" type="text" style="margin-left: 5%; padding-left: 2%;" placeholder="  Carlingford,NSW" oninput="weatherInputFunc()">
+              <input id="weatherInput" type="text" style="margin-left: 5%; padding-left: 2%;" placeholder="  Paddington,NSW" oninput="weatherInputFunc()">
             </div>
             <div style="display: flex; padding: 2.5%;">
               <p>Show Class Codes</p>
@@ -110,10 +90,7 @@
               <button onclick="localStorage.removeItem(`personalTimetable`); window.location.href='./upload.html'" style="margin-left: 5%;">Erase Timetable</button>
             </div>
             <div style="padding-top: 2%">
-              <a onClick="window.location.href='https://chrome.google.com/webstore/detail/kronos/olhbpdalnokbaabnlodbcefpfbnjioam'" class="hereButton" style="padding: 2.5%;">Install Chrome Extension</a>
-              <a onClick="window.location.href='./firefoxExtension.xpi'" download class="hereButton" style="padding: 2.5%;">Install Firefox Add-on</a>
-              <a onClick="window.location.href='https://ruseutilities-group.creator-spring.com/'" class="hereButton" style="padding: 2.5%;">Buy Merch</a>
-              <a onClick="window.location.href='https://docs.google.com/document/d/1fpUa5cejrnxtDrJ97kbghI2EbX5SEvO0HF-EO0ja0r4/edit'" class="hereButton" style="padding: 2.5%;">Set Dashboard As New Tab</a>
+              <a style="padding: 2.5%;">Adapted from RuseKronos by RuseUtilities Group</a>
               <a onClick="window.location.href='https://forms.gle/uG4R62sq4vCkLz1z6'" class="hereButton" style="padding: 2.5%;">Feedback</a>
               <a onClick="window.location.href='./legal.html'" class="hereButton" style="padding: 2.5%;">Legal and T&Cs</a>
             </div>

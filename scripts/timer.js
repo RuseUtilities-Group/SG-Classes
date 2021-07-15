@@ -93,11 +93,17 @@ function gen_table(json) {
 	}
 	for(var [k, v] of Object.entries(it)) {
 		if(k.startsWith("P")) var k1 = k.split("eriod ")[0] + k.split("eriod ")[1];
+		if(k1 === "P0") var k1 = "PH"
+		else if(v.subject === "Assembly"){ 
+			var k1 = "";
+		}
+		else if(k.startsWith("P")) var k1 = k.split("eriod ")[0] + k.split("eriod ")[1];
 		else k1 = k;
 		tstr += "<tr><td id=\"time1\">";
 		if(v.room == "Sport"){
 			tstr += `<div class="timeSubtext">${k1}: Sport</div>`
 		}else if(localStorage.getItem("breakCheck") === "1" &&  (v.room === "Recess"|| v.room === "Lunch"||v.room === "End of Day"||v.room === "Assembly"||v.room === "Transition"))  tstr += `<div class="timeSubtext">${v.room} - ${v.startTime}<div>`;
+		else if(v.subject === "Assembly") tstr += `<div class="timeSubtext">Assembly with ${v.teacher} - ${v.startTime}<div>`;
 		else if(v.room === "Recess"||v.room === "Lunch"||v.room === "End of Day"||v.room === "Assembly"||v.room === "Transition");
 		else if(localStorage.getItem("timeCheck") === "1" && addDetails && v.room != ""){
 			if(localStorage.getItem("classCheck") === "1") tstr += `<div class="timeSubtext">${k1}: ${v.class1} with ${v.teacher} at ${v.room} - ${v.startTime}<div>`;
@@ -166,9 +172,9 @@ function update(json) {
 		} else if(json.timetableData[dateNamesTo[day()].toLowerCase() + week()][times[next].periodName].room === "End of Day"){
 			extraPeriod = "End of Day";
 			subject = "End of Day";
-		} else if(json.timetableData[dateNamesTo[day()].toLowerCase() + week()][times[next].periodName].room === "Assembly"){
-			extraPeriod = "Assembly";
-			subject = "Assembly";
+		} else if(json.timetableData[dateNamesTo[day()].toLowerCase() + week()][times[next].periodName].subject === "Assembly"){
+			extraPeriod = `Assembly with ${json.timetableData[dateNamesTo[day()].toLowerCase() + week()][times[next].periodName].teacher}`;
+			subject = `Assembly`;
 		} else if(json.timetableData[dateNamesTo[day()].toLowerCase() + week()][times[next].periodName].room === "Transition"){
 			extraPeriod = "Transition";
 			subject = "Transition";

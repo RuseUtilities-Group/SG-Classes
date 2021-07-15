@@ -79,7 +79,7 @@ async function icalProcess() {
 		//	subject is in .summary
 		//	location is in .location
 
-		var listOfDays = ['tuesdayA', 'wednesdayA', 'thursdayA','fridayA', 'mondayB', 'tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB', 'mondayA'];
+		var listOfDays = ['mondayA', 'tuesdayA', 'wednesdayA', 'thursdayA','fridayA', 'mondayB', 'tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB'];
 		var curDay = 0;
 
 		var prevPeriod = 0;
@@ -93,12 +93,12 @@ async function icalProcess() {
 				continue;
 			}
 			if(prevPeriod > period) {
-				if(prevPeriod == 8) { 
+				if(prevPeriod == 4) { 
 					//Reset back to first period monday
 					offset = i
 					
 					//Modify the list
-					listOfDays = ['tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB', 'mondayA', 'tuesdayA', 'wednesdayA', 'thursdayA', 'fridayA', 'mondayB'];
+					//listOfDays = ['tuesdayA', 'wednesdayA', 'thursdayA', 'fridayA', 'mondayB', 'tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB', 'mondayA'];
 					break;
 				}
 			}
@@ -140,6 +140,7 @@ async function icalProcess() {
 			console.log(teacherFirstName);
 			console.log(teacherLastName);
 			var teacher = teacherTitle.charAt(0).toUpperCase() + teacherTitle.slice(1).toLowerCase() + " " + teacherLastName.charAt(0).toUpperCase() + teacherLastName.slice(1).toLowerCase();;
+			if(teacherTitle.charAt(0).toUpperCase() !== "M" && teacherTitle.charAt(0).toUpperCase() !== "D") teacher = tAndP[0]
 			console.log(teacher);
 			var period = tAndP[1].split(": ")[1];
 			if(period === "H") period = 0;
@@ -154,6 +155,7 @@ async function icalProcess() {
 
 			//Dealing with the location elements
 			var room = lctn.split(": ")[1];
+			if(!room) room = "";
 
 			//Bounds check
 			if (Number.isNaN(period)) {
@@ -182,7 +184,7 @@ async function icalProcess() {
 				//jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].periodLength = (Math.abs(periodEnd - periodStart) / (1000 * 60)).toString();
 				jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].teacher = teacher;
 				jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].subject = subject;
-				//jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].class1 = class1;
+				jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].class1 = class1;
 				jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].room = room;
 			} catch(e){}
 			// console.log(periodStart);

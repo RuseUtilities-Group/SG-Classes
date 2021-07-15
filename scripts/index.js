@@ -16,7 +16,7 @@ async function registerSW(){
 var name1 = localStorage.getItem("name")
 if(!localStorage.getItem("name")) name1= ""
 var city = localStorage.getItem("weather")
-if(!localStorage.getItem("weather")) city= "Carlingford,NSW"
+if(!localStorage.getItem("weather")) city= "Paddington,NSW"
 
 if(!localStorage.getItem("classCheck")) localStorage.setItem("classCheck", "0")
 if(!localStorage.getItem("breakCheck")) localStorage.setItem("breakCheck", "0")
