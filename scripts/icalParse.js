@@ -195,7 +195,7 @@ async function icalProcess() {
 		}
 		console.log(jsonData);
 		localStorage.setItem("personalTimetable", JSON.stringify(jsonData));
-		//window.location.href = "/index.html";
+		window.location.href = "/index.html";
 	} catch(err) {
 		console.log(err);
     }
