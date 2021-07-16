@@ -282,7 +282,7 @@
 },
 
 "fridayA":{ 
-	"Period 0":{
+	"Period 1":{
         "name": "Period H",
 		"subject": "",
 		"room": "",
@@ -291,10 +291,10 @@
 		"periodLength": "40"
 	},
 
-	"Period 1":{
+	"Assembly":{
         "name": "Period Ass",
 		"subject": "",
-		"room": "",
+		"room": "Assembly",
 		"teacher": "",
 		"startTime": "09:35",
 		"periodLength": "40"
@@ -635,7 +635,7 @@
 },
 
 "fridayB":{ 
-	"Period 0":{
+	"Period 1":{
         "name": "Period H",
 		"subject": "",
 		"room": "",
@@ -644,10 +644,10 @@
 		"periodLength": "40"
 	},
 
-	"Period 1":{
+	"Assembly":{
         "name": "Period Ass",
 		"subject": "",
-		"room": "",
+		"room": "Assembly",
 		"teacher": "",
 		"startTime": "09:35",
 		"periodLength": "40"

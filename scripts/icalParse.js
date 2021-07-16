@@ -79,7 +79,7 @@ async function icalProcess() {
 		//	subject is in .summary
 		//	location is in .location
 
-		var listOfDays = ['mondayA', 'tuesdayA', 'wednesdayA', 'thursdayA','fridayA', 'mondayB', 'tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB'];
+		var listOfDays = ['tuesdayA', 'wednesdayA', 'thursdayA','fridayA', 'mondayB', 'tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB', 'mondayA'];
 		var curDay = 0;
 
 		var prevPeriod = 0;
@@ -93,12 +93,12 @@ async function icalProcess() {
 				continue;
 			}
 			if(prevPeriod > period) {
-				if(prevPeriod == 4) { 
+				if(prevPeriod == 8) { 
 					//Reset back to first period monday
 					offset = i
 					
 					//Modify the list
-					//listOfDays = ['tuesdayA', 'wednesdayA', 'thursdayA', 'fridayA', 'mondayB', 'tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB', 'mondayA'];
+					listOfDays = ['tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB', 'mondayA', 'tuesdayA', 'wednesdayA', 'thursdayA', 'fridayA', 'mondayB'];
 					break;
 				}
 			}
@@ -140,8 +140,7 @@ async function icalProcess() {
 			console.log(teacherFirstName);
 			console.log(teacherLastName);
 			var teacher = teacherTitle.charAt(0).toUpperCase() + teacherTitle.slice(1).toLowerCase() + " " + teacherLastName.charAt(0).toUpperCase() + teacherLastName.slice(1).toLowerCase();;
-			if(teacherTitle.charAt(0).toUpperCase() !== "M" && teacherTitle.charAt(0).toUpperCase() !== "D") teacher = tAndP[0]
-			console.log(teacher);
+			if(!teacherTitle.startsWith("D") && !teacherTitle.startsWith("M")) teacher = tAndP[0]
 			var period = tAndP[1].split(": ")[1];
 			if(period === "H") period = 0;
 			else if(period === "Ass") period = 1;
@@ -155,8 +154,7 @@ async function icalProcess() {
 
 			//Dealing with the location elements
 			var room = lctn.split(": ")[1];
-			if(!room) room = "";
-
+			if(!room) room = ""
 			//Bounds check
 			if (Number.isNaN(period)) {
 				prevPeriod = 1000;

@@ -14,6 +14,7 @@ function gen_table(json) {
 	var startTime;
 	var teacher;
 	var room;
+	var periodstr;
 	for(var day = 0; day < 10; day++) {
 		if(day % 5 == 0) {
 			tableIn += "<tr id=\"Weeks\">";
@@ -29,8 +30,9 @@ function gen_table(json) {
 			subject = it[listOfDays[day]][`Period ${period}`].subject;
 			room = it[listOfDays[day]][`Period ${period}`].room;
 
-			if(startTime.startsWith("9") || startTime.startsWith("8")) startTime = "0" + startTime
-
+			if(startTime.startsWith("9") || startTime.startsWith("8")) startTime = "0" + startTime;
+			if(listOfDays[day].startsWith('f') && period === 1) periodstr = "H";
+			else periodstr = period;
 			//if((day % 5 != 2 && period == 3) || (day % 5 == 2 && period == 2)) {
 			//	startTime = it[listOfDays[day]]["Recess"].startTime;
 			//	tableIn += `<tr><td style="padding-left: 14px;">Recess</td>`;
@@ -46,7 +48,7 @@ function gen_table(json) {
 				tableIn += "</tr>";
 			}
 			if(teacher !== "") {
-				tableIn += `<td id="timetableTd1" style="padding-left: 14px;">P${period}: ${subject} <br></td>`;
+				tableIn += `<td id="timetableTd1" style="padding-left: 14px;">P${periodstr}: ${subject} <br></td>`;
 			}
 			else if (room === "Sport"){
 				tableIn += `<td id="timetableTd1" style="padding-left: 14px;">Sports</td>`;
