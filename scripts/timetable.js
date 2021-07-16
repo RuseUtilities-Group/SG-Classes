@@ -22,7 +22,7 @@ function gen_table(json) {
 		tableIn += "<td id=\"timetableTd\"><table id=\"timetableDay\">";
 		tableIn += `<tr><th style="padding-left: 14px">${listOfDays[day].substring(0, listOfDays[day].length-1)[0].toUpperCase() + listOfDays[day].substring(0, listOfDays[day].length-1).slice(1) + " " + listOfDays[day][listOfDays[day].length-1]}</th></tr>`;
 		period = 1;
-		while(typeof it[listOfDays[day]][`Period ${period}`] !== "undefined") {
+		while(it[listOfDays[day]][`Period ${period}`]) {
 			tableIn += "<tr>";
 
 			startTime = it[listOfDays[day]][`Period ${period}`].startTime;
@@ -33,13 +33,20 @@ function gen_table(json) {
 			if(startTime.startsWith("9") || startTime.startsWith("8")) startTime = "0" + startTime;
 			if(listOfDays[day].startsWith('f') && period === 1) periodstr = "H";
 			else periodstr = period;
-			//if((day % 5 != 2 && period == 3) || (day % 5 == 2 && period == 2)) {
-			//	startTime = it[listOfDays[day]]["Recess"].startTime;
-			//	tableIn += `<tr><td style="padding-left: 14px;">Recess</td>`;
-			//	tableIn += `<td id="startTimeTd" style="padding-left: 7px"></td>`;
-			//	tableIn += `<td id="startTimeTd" style="padding-left: 7px">${startTime}</td>`;
-			//	tableIn += "</tr>";
-			//}
+			if((day % 5 != 2 && period == 3) || (day % 5 == 2 && period == 2)) {
+				startTime = it[listOfDays[day]]["Recess 1"].startTime;
+				tableIn += `<tr><td style="padding-left: 14px;">Recess 1</td>`;
+				tableIn += `<td id="startTimeTd" style="padding-left: 7px"></td>`;
+				tableIn += `<td id="startTimeTd" style="padding-left: 7px">${startTime}</td>`;
+				tableIn += "</tr>";
+			}
+			if((day % 5 != 2 && period == 3) || (day % 5 == 2 && period == 2)) {
+				startTime = it[listOfDays[day]]["Recess 2"].startTime;
+				tableIn += `<tr><td style="padding-left: 14px;">Recess 2</td>`;
+				tableIn += `<td id="startTimeTd" style="padding-left: 7px"></td>`;
+				tableIn += `<td id="startTimeTd" style="padding-left: 7px">${startTime}</td>`;
+				tableIn += "</tr>";
+			}
 			if((day % 5 != 2 && period == 5) || (day % 5 == 2 && period == 4)) {
 				startTime = it[listOfDays[day]]["Lunch"].startTime;
 				tableIn += `<tr><td style="padding-left: 14px;">Lunch</td>`;

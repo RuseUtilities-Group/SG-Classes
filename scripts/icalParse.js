@@ -79,7 +79,7 @@ async function icalProcess() {
 		//	subject is in .summary
 		//	location is in .location
 
-		var listOfDays = ['tuesdayA', 'wednesdayA', 'thursdayA','fridayA', 'mondayB', 'tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB', 'mondayA'];
+		var listOfDays = ['mondayA', 'tuesdayA', 'wednesdayA', 'thursdayA','fridayA', 'mondayB', 'tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB'];
 		var curDay = 0;
 
 		var prevPeriod = 0;
@@ -98,7 +98,7 @@ async function icalProcess() {
 					offset = i
 					
 					//Modify the list
-					listOfDays = ['tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB', 'mondayA', 'tuesdayA', 'wednesdayA', 'thursdayA', 'fridayA', 'mondayB'];
+					listOfDays = ['mondayA', 'tuesdayA', 'wednesdayA', 'thursdayA','fridayA', 'mondayB', 'tuesdayB', 'wednesdayB', 'thursdayB', 'fridayB'];
 					break;
 				}
 			}
@@ -133,58 +133,54 @@ async function icalProcess() {
 
 			//Dealing with the description elements
 			var tAndP = description.split("\n");
-			console.log(tAndP)
 			var teacherTitle = tAndP[0].split(" ")[1];
 			var teacherFirstName = tAndP[0].split(" ")[2];
 			var teacherLastName = tAndP[0].split(" ")[3];
-			console.log(teacherFirstName);
-			console.log(teacherLastName);
 			var teacher = teacherTitle.charAt(0).toUpperCase() + teacherTitle.slice(1).toLowerCase() + " " + teacherLastName.charAt(0).toUpperCase() + teacherLastName.slice(1).toLowerCase();;
 			if(!teacherTitle.startsWith("D") && !teacherTitle.startsWith("M")) teacher = tAndP[0]
 			var period = tAndP[1].split(": ")[1];
-			if(period === "H") period = 0;
-			else if(period === "Ass") period = 1;
+			if(period === "H") period = 1;
+			//else if(period === "Ass") period = 0;
 			else period = parseInt(tAndP[1].split(": ")[1], 10);
-			console.log(period)
+			if(period === NaN) period = 5
+			console.log("Period " + period)
+			console.log(listOfDays[curDay%10]);
 
 			//Dealing with the summary elements
 			var subject1 = summary.split(": ")[1];
 			var class1 = summary.split(": ")[0];
 			var subject = subject1.split(" Yr")[0];
-
+			
 			//Dealing with the location elements
 			var room = lctn.split(": ")[1];
 			if(!room) room = ""
 			//Bounds check
-			if (Number.isNaN(period)) {
-				prevPeriod = 1000;
-				continue;
-			}
-			else if(prevPeriod > period) {
+
+			try{
+				console.log("-------------")
+				//jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].startTime = `${hours-1}:${minute.toString().padStart(2, '0')}`;
+				//jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].periodLength = (Math.abs(periodEnd - periodStart) / (1000 * 60)).toString();
+				jsonData.timetableData[listOfDays[curDay]][`Period ${period}`].teacher = teacher;
+				jsonData.timetableData[listOfDays[curDay]][`Period ${period}`].subject = subject;
+				jsonData.timetableData[listOfDays[curDay]][`Period ${period}`].class1 = class1;
+				jsonData.timetableData[listOfDays[curDay]][`Period ${period}`].room = room;
+			} catch(e){}
+			prevPeriod = period;
+
+			if(period === 4) {
 				curDay += 1;
 			}
 
-			if(!(curDay < 10)) {
+			if(curDay >= 10) {
 				break;
 			}
-
-			//console.log(i);
-			console.log("day: " + curDay);
-
+			console.log(subject1 + " with " + teacher + " at " + room)
 
 			// console.log(jsonData.timetableData[listOfDays[curDay]]);
 			// jsonData.timetableData[listOfDays[curDay]][`Period ${period}`];
 			if(curDay % 5 == 0 && period > 4) {
 				console.log("what")
 			}
-			try{
-				//jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].startTime = `${hours-1}:${minute.toString().padStart(2, '0')}`;
-				//jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].periodLength = (Math.abs(periodEnd - periodStart) / (1000 * 60)).toString();
-				jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].teacher = teacher;
-				jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].subject = subject;
-				jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].class1 = class1;
-				jsonData.timetableData[listOfDays[curDay%10]][`Period ${period}`].room = room;
-			} catch(e){}
 			// console.log(periodStart);
 			// console.log(periodEnd);
 			// console.log(hours + ":" + minute.toString().padStart(2, '0'));
@@ -194,13 +190,12 @@ async function icalProcess() {
 			// console.log(room);
 			// console.log(listOfDays[curDay]);
 
-			prevPeriod = period;
 
 			// jsonTimetable["teacher"] = events[i].getFirstPropertyValue('description');
 		}
 		console.log(jsonData);
 		localStorage.setItem("personalTimetable", JSON.stringify(jsonData));
-		window.location.href = "/index.html";
+		//window.location.href = "/index.html";
 	} catch(err) {
 		console.log(err);
     }
